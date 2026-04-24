@@ -1,0 +1,55 @@
+{{/* -------------------------------------------------------------
+     Home page — Terminales (style "lowkey")
+     Utilise le partial natif Blowfish `article-link/simple.html`
+     pour garantir que tout le CSS Tailwind est bien compilé.
+  ------------------------------------------------------------- */}}
+
+{{/* ==================== HERO ==================== */}}
+<section class="max-w-full prose dark:prose-invert mb-10">
+  <header>
+    <p class="text-xl text-neutral-500 dark:text-neutral-400 mt-0">
+      {{ site.Params.description | default "English lessons for French Terminale students." }}
+    </p>
+  </header>
+  {{ with .Content }}
+    <div class="mt-4">{{ . }}</div>
+  {{ end }}
+</section>
+
+{{/* ==================== UNITS ==================== */}}
+{{ $chapters := site.GetPage "section" "chapters" }}
+{{ if $chapters }}
+  <section id="units" class="mb-12 scroll-mt-24">
+    <div class="mb-6 pb-2 border-b border-neutral-300 dark:border-neutral-700">
+      <h2 class="text-2xl font-bold m-0">📚 Units</h2>
+    </div>
+    <div class="space-y-10">
+      {{ range ($chapters.Sections.ByWeight) }}
+        {{ if not .Draft }}
+          {{ partial "article-link/simple.html" . }}
+        {{ end }}
+      {{ end }}
+    </div>
+  </section>
+{{ end }}
+
+{{/* ==================== NEWS ==================== */}}
+{{ $news := site.GetPage "section" "news" }}
+{{ if and $news $news.Pages }}
+  <section class="mb-8">
+    <div class="flex items-baseline justify-between mb-6 pb-2 border-b border-neutral-300 dark:border-neutral-700">
+      <h2 class="text-2xl font-bold m-0">📰 Latest News</h2>
+      <a href="{{ $news.RelPermalink }}"
+         class="text-sm font-medium text-primary-500 hover:underline whitespace-nowrap">
+        See all news →
+      </a>
+    </div>
+    <div class="space-y-10">
+      {{ range first 3 ($news.Pages.ByDate.Reverse) }}
+        {{ if not .Draft }}
+          {{ partial "article-link/simple.html" . }}
+        {{ end }}
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

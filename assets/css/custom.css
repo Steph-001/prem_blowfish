@@ -1,0 +1,89 @@
+/* =========================================================
+   Terminales — custom styles on top of Blowfish (Tailwind)
+   Loaded automatically by Blowfish as assets/css/custom.css
+   ========================================================= */
+
+/* ---------- Stressed vowel in lexicon & flashcards ----------
+   Used by the lexicon shortcode to highlight the stressed
+   syllable (e.g. `dis*e*ase` → dis<span class="stressed-vowel">e</span>ase). */
+.lexicon-list dt .stressed-vowel,
+.stressed-vowel {
+  color: red;
+  font-weight: bold;
+}
+
+/* ---------- Lexicon list definition layout ---------- */
+.lexicon-list dt {
+  font-weight: bold;
+  margin-top: 1em;
+}
+.lexicon-list dd {
+  margin-left: 2em;
+  margin-bottom: 1em;
+}
+
+/* ---------- Media alignment helpers ----------
+   Used by fullscreen-image / pdf / local-video shortcodes. */
+.media-align-left   { display: block !important; margin-left: 0    !important; margin-right: auto !important; }
+.media-align-center { display: block !important; margin-left: auto !important; margin-right: auto !important; }
+.media-align-right  { display: block !important; margin-left: auto !important; margin-right: 0    !important; }
+
+/* ---------- Spacer utility (used by {{< spacer >}}) ---------- */
+.spacer { height: 2rem; }
+
+/* ---------- Audio player (used by {{< audio >}}) ---------- */
+.audio-player-wrapper {
+  margin-bottom: 1rem;
+  max-width: 100%;
+}
+.audio-player-wrapper audio { vertical-align: middle; }
+.audio-left   { margin-right: auto; margin-left: 0; }
+.audio-center { margin-left: auto;  margin-right: auto; }
+.audio-right  { margin-left: auto;  margin-right: 0; }
+
+.audio-player-wrapper.audio-rounded {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.audio-player-wrapper.audio-rounded audio {
+  width: 100%;
+  border-radius: 0;
+}
+
+/* ---------- Justified text helper ---------- */
+.text-justify { text-align: justify !important; }
+
+/* ---------- Video + caption wrapper (legacy Docsy class) ----------
+   Kept because the chapter markdown still uses it. */
+.video-plus-card-wrapper {
+  display: block;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* ---------- Cartes de liste (home, /chapters/, /news/) ----------
+   Active via `[list] showCards = true` dans params.toml.
+   On override la couleur de bordure neutre Blowfish (gris) pour
+   obtenir un filet bleu clair + effet au survol. */
+.article-link--simple {
+  border-color: #bfdbfe !important;           /* blue-200 : filet très léger */
+  background-color: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.article-link--simple:hover {
+  border-color: #60a5fa !important;           /* blue-400 : plus marqué au hover */
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.18);
+  transform: translateY(-1px);
+}
+
+/* Mode sombre */
+html.dark .article-link--simple {
+  border-color: #1e3a8a !important;           /* blue-900 */
+  background-color: #1a1a1a;
+}
+html.dark .article-link--simple:hover {
+  border-color: #3b82f6 !important;           /* blue-500 */
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+}

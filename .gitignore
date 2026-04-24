@@ -1,0 +1,39 @@
+# === Hugo ===
+# Build output, régénéré à chaque `hugo` — jamais dans Git.
+public/
+# Cache d'images Hugo (resizing, filters), regénéré automatiquement.
+resources/_gen/
+.hugo_build.lock
+
+# === Node ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# === Médias lourds ===
+# Les vidéos sont synchronisées via iCloud entre Mac et PC
+# (~/Sync) — pas besoin de les mettre dans Git (trop lourd pour GitHub).
+# Si un jour tu veux les versionner : regarde Git LFS.
+*.mp4
+*.mov
+*.webm
+*.mkv
+
+# === macOS ===
+.DS_Store
+._*
+
+# === Éditeurs ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# === Env / secrets ===
+.env
+.env.local
+.env.*.local
+*.log

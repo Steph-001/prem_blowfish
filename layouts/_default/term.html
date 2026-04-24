@@ -1,0 +1,57 @@
+{{ define "main" }}
+  {{ .Scratch.Set "scope" "term" }}
+  {{ $showHero := .Params.showHero | default site.Params.term.showHero | default false }}
+  {{ if $showHero }}
+    {{ $heroStyle := print "hero/" site.Params.term.heroStyle ".html" }}
+    {{ if templates.Exists ( printf "partials/%s" $heroStyle ) }}
+      {{ partial $heroStyle . }}
+    {{ else }}
+      {{ partial "hero/basic.html" . }}
+    {{ end }}
+  {{- end -}}
+
+
+  <header class="mt-5">
+    {{ if .Params.showBreadcrumbs | default (site.Params.term.showBreadcrumbs | default false) }}
+      {{ partial "breadcrumbs.html" . }}
+    {{ end }}
+    <h1 class="mt-5 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title }}</h1>
+    <div class="mt-1 mb-2 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+      {{ partial "article-meta/term.html" (dict "context" . "scope" "single") }}
+    </div>
+  </header>
+
+  <section class="flex flex-col max-w-full mt-0 mb-5 prose dark:prose-invert lg:flex-row">
+    {{ if .Content }}
+      <div class="min-w-0 min-h-0 max-w-prose">
+        {{ .Content }}
+      </div>
+    {{ end }}
+  </section>
+
+  {{ if gt .Pages 0 }}
+    {{/* -----------------------------------------------------------------
+         OVERRIDE : chaque page taguée est affichée dans un cadre compact
+         avec uniquement le titre (pas de vignette, pas de résumé).
+         ----------------------------------------------------------------- */}}
+    <section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3 mt-6">
+      {{ range (.Paginate (.Pages.GroupByDate "2006")).PageGroups }}
+        {{ range .Pages }}
+          <a href="{{ .RelPermalink }}"
+             class="not-prose block rounded-lg border border-neutral-300 dark:border-neutral-600 p-4 hover:border-primary-500 hover:underline hover:underline-offset-2 decoration-primary-500 text-neutral-800 dark:text-neutral">
+            <span class="text-xl font-bold">{{ .Title | emojify }}</span>
+          </a>
+        {{ end }}
+      {{ end }}
+    </section>
+
+  {{ else }}
+    <section class="mt-10 prose dark:prose-invert">
+      <p class="py-8 border-t">
+        <em>{{ i18n "term.no_articles" | emojify }}</em>
+      </p>
+    </section>
+  {{ end }}
+
+  {{ partial "pagination.html" . }}
+{{ end }}

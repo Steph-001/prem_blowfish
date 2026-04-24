@@ -1,0 +1,107 @@
+[
+  {
+    "base": "do",
+    "past": "did",
+    "participle": "done"
+  },
+  {
+    "base": "say",
+    "past": "said",
+    "participle": "said"
+  },
+  {
+    "base": "go",
+    "past": "went",
+    "participle": "gone"
+  },
+  {
+    "base": "get",
+    "past": "got",
+    "participle": "got/gotten"
+  },
+  {
+    "base": "make",
+    "past": "made",
+    "participle": "made"
+  },
+  {
+    "base": "know",
+    "past": "knew",
+    "participle": "known"
+  },
+  {
+    "base": "think",
+    "past": "thought",
+    "participle": "thought"
+  },
+  {
+    "base": "come",
+    "past": "came",
+    "participle": "come"
+  },
+  {
+    "base": "find",
+    "past": "found",
+    "participle": "found"
+  },
+  {
+    "base": "give",
+    "past": "gave",
+    "participle": "given"
+  },
+  {
+    "base": "tell",
+    "past": "told",
+    "participle": "told"
+  },
+  {
+    "base": "become",
+    "past": "became",
+    "participle": "become"
+  },
+  {
+    "base": "show",
+    "past": "showed",
+    "participle": "shown"
+  },
+  {
+    "base": "leave",
+    "past": "left",
+    "participle": "left"
+  },
+  {
+    "base": "feel",
+    "past": "felt",
+    "participle": "felt"
+  },
+  {
+    "base": "write",
+    "past": "wrote",
+    "participle": "written"
+  },
+  {
+    "base": "see",
+    "past": "saw",
+    "participle": "seen"
+  },
+  {
+    "base": "have",
+    "past": "had",
+    "participle": "had"
+  },
+  {
+    "base": "feel",
+    "past": "felt",
+    "participle": "felt"
+  },
+  {
+    "base": "bring",
+    "past": "brought",
+    "participle": "brought"
+  },
+  {
+    "base": "forget",
+    "past": "forgot",
+    "participle": "forgotten"
+  }
+]

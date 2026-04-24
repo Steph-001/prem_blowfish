@@ -1,0 +1,63 @@
+{{- /* -------------------------------------------------------------
+     Usage (inside a unit's lexicon.md):
+
+         {{< lexicon >}}
+
+     Reads the `lexicon:` array from the PARENT section's front-matter
+     (the unit's _index.md), sorts it alphabetically by `term`, and
+     renders it as a <dl>. Stressed vowels marked with `*a` / `*e` /
+     … get wrapped in <span class="stressed-vowel"> (red + bold via
+     static/css/theme-terminales.css).
+  ------------------------------------------------------------- */ -}}
+
+{{- $unitPage := .Page.Parent -}}
+{{- if not $unitPage -}}
+  {{- $unitPage = .Page.Site.GetPage (.Page.Dir | strings.TrimSuffix "/") -}}
+{{- end -}}
+
+{{- if $unitPage -}}
+  <style>
+    .lexicon-list {
+      margin: 1.5rem 0;
+      padding: 0;
+    }
+    .lexicon-list dt {
+      margin: 0;
+      padding: 0;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    .lexicon-list dd {
+      margin: 0.15rem 0 1rem 0;
+      padding: 0;
+      color: inherit;
+      opacity: 0.85;
+    }
+    .lexicon-list dd p {
+      margin: 0;
+    }
+  </style>
+  <h2>📖 {{ $unitPage.Title }} &mdash; Vocabulary</h2>
+  {{- with $unitPage.Params.lexicon -}}
+    {{- $sorted := sort . "term" -}}
+    <dl class="lexicon-list">
+      {{- range $sorted }}
+        <dt id="{{ .term | anchorize }}">
+          {{- if .stressed -}}
+            {{ .stressed | replaceRE "\\*([ayeiouwAYEIOU])" "<span class=\"stressed-vowel\">$1</span>" | safeHTML }}
+          {{- else -}}
+            {{ .term }}
+          {{- end -}}
+        </dt>
+        <dd>{{ .definition | markdownify }}</dd>
+      {{- end }}
+    </dl>
+    <p>
+      <a href="{{ $unitPage.RelPermalink }}">&larr; Return to {{ $unitPage.Title }}</a>
+    </p>
+  {{- else -}}
+    <p><em>No vocabulary for this unit yet.</em></p>
+  {{- end -}}
+{{- else -}}
+  <p><em>Lexicon error: could not find the parent unit page.</em></p>
+{{- end -}}
