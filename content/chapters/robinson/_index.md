@@ -87,6 +87,7 @@ showTableOfContents: true
   </div>
 </div>
 </div>
+
 ### A - The Enduring Myth of Robinson Crusoe
 #### *Why can the myth of Robinson be considered a real-life story?*
 #### Back to the origins of Robinson
@@ -101,6 +102,7 @@ showTableOfContents: true
     <p class="card-text text-justify"> </p><span class="text-primary fw-bold">Ada Blackjack</span> was an Iñupiaq woman who accompanied an Arctic expedition to the uninhabited Wrangel Island, north of Siberia, eventually living alone on the island for eight months after the other expedition members left or died.
   </div>
 </div>
+
 #### The Arctic's real life Robinson
 
 {{< spacer height="2rem" >}}
