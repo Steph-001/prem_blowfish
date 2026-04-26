@@ -4,7 +4,7 @@ linkTitle: Magic of English
 date: '2025-08-11T22:37:25+02:00'
 draft: false
 weight: 10
-featureimage: tweet.jpg
+featureimage: vignette.jpg
 description: ''
 lexicon:
 - term: morphology
@@ -97,6 +97,7 @@ showTableOfContents: true
     <p class="card-text text-justify">The history of the English language.</p>
   </div>
 </div>
+
 ### Power 5: Musicality
 
 {{< audio src="Oneil_3.mp3" width="80%" rounded="true" >}}
