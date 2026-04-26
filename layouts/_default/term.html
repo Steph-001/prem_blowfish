@@ -37,9 +37,10 @@
     <section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3 mt-6">
       {{ range (.Paginate (.Pages.GroupByDate "2006")).PageGroups }}
         {{ range .Pages }}
+          {{ $label := or .LinkTitle .Title (.File.BaseFileName | humanize | title) }}
           <a href="{{ .RelPermalink }}"
              class="not-prose block rounded-lg border border-neutral-300 dark:border-neutral-600 p-4 hover:border-primary-500 hover:underline hover:underline-offset-2 decoration-primary-500 text-neutral-800 dark:text-neutral">
-            <span class="text-xl font-bold">{{ .Title | emojify }}</span>
+            <span class="text-xl font-bold">{{ $label | emojify }}</span>
           </a>
         {{ end }}
       {{ end }}

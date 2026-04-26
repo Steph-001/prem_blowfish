@@ -87,3 +87,122 @@ html.dark .article-link--simple:hover {
   border-color: #3b82f6 !important;           /* blue-500 */
   box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
 }
+
+/* ---------- Vignette-date pour les posts /news/ ----------
+   Remplace l'image par un bloc calendrier mois + jour + année.
+   Rendu par layouts/partials/article-link/simple.html quand
+   $isNews est vrai. Couleurs alignées sur le filet bleu. */
+/* ---------- News line sur la home ----------
+   Une ligne discrète au-dessus des Units. Pas de carte, pas de
+   fond. Juste un petit point coloré + label + titre du dernier
+   post. Le point pulse doucement si le post est récent. */
+.news-line {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #475569;                      /* slate-600 */
+}
+html.dark .news-line { color: #cbd5e1; } /* slate-300 */
+
+.news-line__dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: #94a3b8;                 /* slate-400 — neutre */
+  flex-shrink: 0;
+  align-self: center;
+}
+.news-line__dot--fresh {
+  background: #ef4444;                 /* red-500 — récent */
+  box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5);
+  animation: news-line-pulse 2.4s ease-out infinite;
+}
+@keyframes news-line-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .news-line__dot--fresh { animation: none; }
+}
+
+.news-line__label {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: #64748b;                      /* slate-500 */
+}
+html.dark .news-line__label { color: #94a3b8; }
+
+.news-line__link {
+  color: #1f2937;                      /* slate-800 */
+  text-decoration: none;
+  font-weight: 500;
+}
+.news-line__link:hover {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+html.dark .news-line__link { color: #e5e7eb; }
+html.dark .news-line__link:hover { color: #93c5fd; }
+
+.news-line__more {
+  font-size: 0.75rem;
+  color: #94a3b8;                      /* slate-400 */
+  text-decoration: none;
+  white-space: nowrap;
+  margin-left: auto;
+}
+.news-line__more:hover { color: #2563eb; text-decoration: underline; }
+html.dark .news-line__more { color: #64748b; }
+html.dark .news-line__more:hover { color: #93c5fd; }
+
+/* Bloc thumbnail réduit pour les posts news (60% de 300x180). */
+.news-thumbnail {
+  width: 180px !important;
+  min-height: 108px !important;
+}
+@media (max-width: 767px) {
+  .news-thumbnail {
+    width: 100% !important;
+    min-height: 108px !important;
+  }
+}
+
+.news-date-tile {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+  color: #f8fafc;
+  line-height: 1;
+}
+.news-date-tile__month {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  opacity: 0.9;
+}
+.news-date-tile__day {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0.24rem 0;
+}
+.news-date-tile__year {
+  font-size: 0.525rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+html.dark .news-date-tile {
+  background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+}

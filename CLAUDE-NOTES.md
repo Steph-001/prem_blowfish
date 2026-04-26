@@ -73,6 +73,57 @@ tags: [Grammar]          # ⚠️ TOUJOURS en liste, même pour un seul tag
 plutôt que `pageRef = "tags"` — `pageRef` peut devenir capricieux quand le
 nombre de tags bouge.
 
+### Menu de navigation (barre du haut)
+Configuré dans `config/_default/menus.en.toml`. Chaque entrée est un bloc
+`[[main]]` ; l'ordre d'affichage est dicté par `weight` (du plus petit au plus
+grand). État actuel : Units (10) · News (20) · Verbs (25) · Dictionary (30) ·
+Tags (50).
+
+**Ajouter une entrée simple :**
+
+```toml
+[[main]]
+  name = "Mon Lien"          # libellé affiché
+  url = "/ma-page/"          # ou pageRef = "ma-page" pour une section interne
+  weight = 35                # placement (entre Dictionary 30 et Tags 50)
+```
+
+- `url` accepte aussi un lien externe (`https://…`) ou une ancre (`/#units`).
+- `pageRef` cible une page Hugo par son chemin relatif (sans slash final).
+  Plus fragile que `url` si la page bouge ; pour `/tags/` on a délibérément
+  gardé `url = "/tags/"`.
+
+**Créer un dropdown** (menu déroulant avec sous-entrées) :
+
+```toml
+# parent — pas de url, juste un identifier qui sera référencé par les enfants
+[[main]]
+  name = "Resources"
+  identifier = "resources"
+  weight = 40
+
+# enfants — déclarés avec parent = "<identifier>"
+[[main]]
+  name = "Linguee"
+  url = "https://www.linguee.com/english-french"
+  parent = "resources"
+  weight = 10
+```
+
+⚠️ Un dropdown sans enfants est cassé visuellement (clic à vide) — supprimer
+le parent dès que tu retires son dernier enfant.
+
+**Supprimer une entrée :** effacer simplement le bloc `[[main]]` correspondant.
+Si c'est un dropdown, effacer aussi tous ses enfants (parent = "<identifier>").
+
+**Propagation aux 3 sites :** les 3 menus (sec/prem/EnglishClass) sont
+identiques. Toujours dupliquer la modif :
+
+```bash
+cp ~/Sync/sec/config/_default/menus.en.toml ~/Sync/prem/config/_default/menus.en.toml
+cp ~/Sync/sec/config/_default/menus.en.toml ~/Sync/EnglishClass/config/_default/menus.en.toml
+```
+
 ### Images home (vignettes lowkey)
 - Format : **WebP** (ou JPG propre) en **3:2**, ~100 KB.
 - L'override `article-link/simple.html` cherche dans cet ordre :

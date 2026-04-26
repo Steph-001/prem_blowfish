@@ -4,7 +4,7 @@ linkTitle: American Identity
 date: '2025-09-28T15:04:39+02:00'
 draft: false
 weight: 9
-featureimage: colossus.jpg
+featureimage: liberty.webp
 description: What does it mean to be American?
 lexicon:
 - term: refugee

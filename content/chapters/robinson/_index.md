@@ -4,7 +4,7 @@ linkTitle: Robinson
 date: '2025-10-27T14:56:15+01:00'
 draft: false
 weight: 8
-featureimage: photo.jpg
+featureimage: vignette.jpg
 description: ''
 lexicon:
 - term: (to) hunt

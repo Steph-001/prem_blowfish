@@ -87,16 +87,28 @@
 {{ end }}
 
 
+{{ $isNews := eq .Section "news" }}
 <article class="article-link--simple {{ $cardClasses }}">
-  {{ with $featuredURL }}
-    <div class="flex-none relative overflow-hidden {{ $imgWrapperClasses }} thumbnail">
-      <img
-        src="{{ . }}"
-        role="presentation"
-        loading="lazy"
-        decoding="async"
-        class="not-prose absolute inset-0 w-full h-full object-cover">
+  {{ if $isNews }}
+    {{/* date tile à la place de l'image pour les posts news */}}
+    <div class="flex-none relative overflow-hidden {{ $imgWrapperClasses }} thumbnail news-thumbnail">
+      <div class="news-date-tile">
+        <div class="news-date-tile__month">{{ .Date.Format "January" }}</div>
+        <div class="news-date-tile__day">{{ .Date.Format "2" }}</div>
+        <div class="news-date-tile__year">{{ .Date.Format "2006" }}</div>
+      </div>
     </div>
+  {{ else }}
+    {{ with $featuredURL }}
+      <div class="flex-none relative overflow-hidden {{ $imgWrapperClasses }} thumbnail">
+        <img
+          src="{{ . }}"
+          role="presentation"
+          loading="lazy"
+          decoding="async"
+          class="not-prose absolute inset-0 w-full h-full object-cover">
+      </div>
+    {{ end }}
   {{ end }}
   <div class="{{ $cardContentClasses }}">
     <header class="items-center text-start text-xl font-semibold">

@@ -5,7 +5,7 @@
   ------------------------------------------------------------- */}}
 
 {{/* ==================== HERO ==================== */}}
-<section class="max-w-full prose dark:prose-invert mb-10">
+<section class="max-w-full prose dark:prose-invert mb-8">
   <header>
     <p class="text-xl text-neutral-500 dark:text-neutral-400 mt-0">
       {{ site.Params.description | default "English lessons for French Terminale students." }}
@@ -16,6 +16,25 @@
   {{ end }}
 </section>
 
+{{/* ==================== NEWS LINE ====================
+     Ligne fine au-dessus des Units : juste le titre du dernier
+     post, pour signaler qu'il y a une nouveauté. Pas de carte,
+     pas de fond. Simple ligne avec un point coloré qui pulse
+     légèrement si le post est récent (< 14 jours). */}}
+{{ $news := site.GetPage "section" "news" }}
+{{ if and $news $news.Pages }}
+  {{ $latest := index ($news.Pages.ByDate.Reverse) 0 }}
+  {{ $fresh := lt (sub now.Unix $latest.Date.Unix) 1209600 }}
+  <div class="news-line not-prose mb-6">
+    <span class="news-line__dot {{ if $fresh }}news-line__dot--fresh{{ end }}" aria-hidden="true"></span>
+    <span class="news-line__label">Latest news:</span>
+    <a href="{{ $latest.RelPermalink }}" class="news-line__link">
+      {{ $latest.Title | emojify }}
+    </a>
+    <a href="{{ $news.RelPermalink }}" class="news-line__more">all →</a>
+  </div>
+{{ end }}
+
 {{/* ==================== UNITS ==================== */}}
 {{ $chapters := site.GetPage "section" "chapters" }}
 {{ if $chapters }}
@@ -25,27 +44,6 @@
     </div>
     <div class="space-y-10">
       {{ range ($chapters.Sections.ByWeight) }}
-        {{ if not .Draft }}
-          {{ partial "article-link/simple.html" . }}
-        {{ end }}
-      {{ end }}
-    </div>
-  </section>
-{{ end }}
-
-{{/* ==================== NEWS ==================== */}}
-{{ $news := site.GetPage "section" "news" }}
-{{ if and $news $news.Pages }}
-  <section class="mb-8">
-    <div class="flex items-baseline justify-between mb-6 pb-2 border-b border-neutral-300 dark:border-neutral-700">
-      <h2 class="text-2xl font-bold m-0">📰 Latest News</h2>
-      <a href="{{ $news.RelPermalink }}"
-         class="text-sm font-medium text-primary-500 hover:underline whitespace-nowrap">
-        See all news →
-      </a>
-    </div>
-    <div class="space-y-10">
-      {{ range first 3 ($news.Pages.ByDate.Reverse) }}
         {{ if not .Draft }}
           {{ partial "article-link/simple.html" . }}
         {{ end }}

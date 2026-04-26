@@ -2,7 +2,8 @@
 title: "News"
 linkTitle: "News"
 weight: 30
-layout: simple
+cascade:
+  showDate: true
 ---
 
 Latest news and announcements.

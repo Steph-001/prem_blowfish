@@ -31,18 +31,6 @@
   weight = 30
 
 [[main]]
-  name = "Resources"
-  identifier = "resources"
-  weight = 40
-
-# --- children of "Resources" dropdown ---
-[[main]]
-  name = "Linguee"
-  url = "https://www.linguee.com/english-french"
-  parent = "resources"
-  weight = 10
-
-[[main]]
   name = "Tags"
   url = "/tags/"
   weight = 50

@@ -4,7 +4,7 @@ linkTitle: Women Detectives
 date: 2025-04-15 22:00:04+02:00
 draft: false
 weight: 7
-featureimage: p39.jpg
+featureimage: vignette.png
 description: How are women detectives represented in fiction?
 lexicon:
 - term: investigation
