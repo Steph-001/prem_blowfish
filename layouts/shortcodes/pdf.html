@@ -22,17 +22,23 @@
     max_width (opt)     : largeur max ("100%", "800px", etc.). Défaut "100%".
     align (opt)         : "center" ou "left". Défaut "center".
                           ("right" est mappé vers "left" — voir note Docsy.)
+    max_pages (opt)     : nombre de pages à afficher en mode rasterisé.
+                          Défaut "0" = toutes. Ex: "1" affiche uniquement
+                          la première page. Le bouton Download pointe
+                          toujours vers le PDF complet.
     aspect_ratio (opt)  : utilisé uniquement par le fallback `<object>`.
                           Défaut A4 portrait (1.4143).
 
   Exemples :
     {{< pdf src="circe.pdf" >}}
     {{< pdf src="circe.pdf" max_width="80%" align="left" >}}
+    {{< pdf src="long_doc.pdf" max_pages="1" >}}
 */}}
 
 {{ $src        := .Get "src" }}
 {{ $maxWidth   := .Get "max_width"    | default "100%" }}
 {{ $align      := .Get "align"        | default "center" }}
+{{ $maxPages   := int (.Get "max_pages" | default 0) }}
 {{ $aspectRatio := .Get "aspect_ratio" | default "1.4143" }}
 
 {{/* Normalise align (cf. fullscreen-image / pdf historique) */}}
@@ -65,8 +71,13 @@
   <div class="pdf-embed-wrapper mb-4 {{ $alignClass }}" style="max-width: {{ $maxWidth }};">
     {{ if $pages }}
       {{/* === Mode "images empilées" === */}}
+      {{/* Si max_pages > 0, on limite le nombre de pages affichées. */}}
+      {{ $displayedPages := $pages }}
+      {{ if gt $maxPages 0 }}
+        {{ $displayedPages = first $maxPages $pages }}
+      {{ end }}
       <div class="pdf-pages">
-        {{ range $pages }}
+        {{ range $displayedPages }}
           <img src="{{ .RelPermalink }}"
                alt="Page {{ . }}"
                loading="lazy"
