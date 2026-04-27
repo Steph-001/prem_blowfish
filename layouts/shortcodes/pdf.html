@@ -1,79 +1,102 @@
 {{/* layouts/shortcodes/pdf.html */}}
 {{/*
-  Displays an embedded PDF viewer with a fixed aspect ratio (A4 portrait default)
-  and optional alignment and maximum width.
+  Affiche un PDF :
 
-  Parameters:
-    src (required): Path to the PDF file.
-    max_width (optional): Maximum width (e.g., "800px", "90%"). Defaults to 100%.
-    align (optional): Horizontal alignment — "center" or "left". Defaults to "center".
-                      NOTE: "right" est accepté mais traité comme "left" pour
-                      préserver le rendu historique du shortcode Docsy (qui
-                      n'alignait à droite aucun PDF).
-    aspect_ratio (optional): Height/Width ratio. Defaults to A4 portrait (1.4143).
+  1. Si des images converties `<base>-page-*.jpg` existent à côté du PDF
+     dans le dossier de la page, on affiche ces images empilées
+     (rendu propre, sans toolbar de viewer navigateur).
+  2. Sinon, on retombe sur l'embed natif `<object>` historique.
 
-  Usage examples:
-    {{< pdf src="report.pdf" >}} (Centered, 100% max-width)
-    {{< pdf src="report.pdf" max_width="700px" >}} (Centered, max 700px wide)
-    {{< pdf src="report.pdf" max_width="80%" align="left" >}} (Left-aligned, max 80% wide)
-    {{< pdf src="landscape.pdf" aspect_ratio="0.707" >}} (Landscape A4)
+  Dans les deux cas, un bouton « ⬇ Download PDF » est rendu sous le bloc
+  pour permettre aux élèves de télécharger le document original.
+
+  Conversion des PDF (à lancer une fois sur le Mac, après ajout d'un PDF) :
+      brew install poppler
+      cd content/chapters/<chapitre>/
+      for pdf in *.pdf; do
+        pdftoppm -jpeg -r 150 "$pdf" "${pdf%.pdf}-page"
+      done
+
+  Paramètres :
+    src (requis)        : chemin vers le PDF
+    max_width (opt)     : largeur max ("100%", "800px", etc.). Défaut "100%".
+    align (opt)         : "center" ou "left". Défaut "center".
+                          ("right" est mappé vers "left" — voir note Docsy.)
+    aspect_ratio (opt)  : utilisé uniquement par le fallback `<object>`.
+                          Défaut A4 portrait (1.4143).
+
+  Exemples :
+    {{< pdf src="circe.pdf" >}}
+    {{< pdf src="circe.pdf" max_width="80%" align="left" >}}
 */}}
 
-{{ $src := .Get "src" }}
-{{ $maxWidth := .Get "max_width" | default "100%" }}
-{{ $align := .Get "align" | default "center" }}
-{{/* Allow overriding aspect ratio, default to A4 Portrait (29.7 / 21) */}}
+{{ $src        := .Get "src" }}
+{{ $maxWidth   := .Get "max_width"    | default "100%" }}
+{{ $align      := .Get "align"        | default "center" }}
 {{ $aspectRatio := .Get "aspect_ratio" | default "1.4143" }}
-{{ $aspectRatioPercent := printf "%v%%" (mul (float $aspectRatio) 100.0) }}
 
+{{/* Normalise align (cf. fullscreen-image / pdf historique) */}}
+{{ $align = lower $align }}
+{{ if eq $align "right" }}{{ $align = "left" }}{{ end }}
+{{ if not (in (slice "left" "center") $align) }}{{ $align = "center" }}{{ end }}
+{{ $alignClass := printf "media-align-%s" $align }}
 
+{{/* Résolution du PDF dans les ressources de la page */}}
 {{ $file := .Page.Resources.GetMatch $src }}
 {{ $pdfSrc := "" }}
 {{ if $file }}
-    {{ $pdfSrc = $file.RelPermalink }}
+  {{ $pdfSrc = $file.RelPermalink }}
 {{ else }}
-    {{ $pdfSrc = $src | relURL }}
+  {{ $pdfSrc = $src | relURL }}
+{{ end }}
+
+{{/* Recherche des pages converties : <base>-page-*.jpg */}}
+{{ $base := strings.TrimSuffix ".pdf" (path.Base $src) }}
+{{/* Ex : "James" pour "James.pdf" */}}
+{{ $pagePattern := printf "%s-page-*.jpg" $base }}
+{{ $pages := .Page.Resources.Match $pagePattern }}
+{{/* Cas-rare : .pdf en majuscules → tester aussi en lower */}}
+{{ if not $pages }}
+  {{ $altPattern := printf "%s-page-*.jpg" (lower $base) }}
+  {{ $pages = .Page.Resources.Match $altPattern }}
 {{ end }}
 
 {{ if $pdfSrc }}
-  {{/* Normalise align.
-
-       Comme pour `fullscreen-image`, on préserve le comportement du
-       shortcode Docsy d'origine : seul `center` produisait un vrai
-       centrage (`mx-auto`) ; toute autre valeur (y compris `right`)
-       tombait en block sans marge, donc aligné à gauche. Le contenu
-       existant (amish, witches, …) écrit `align="right"` en croyant
-       obtenir un floating à droite — mais c'était du gauche en fait.
-       On mappe donc ici `right` → `left` pour un rendu identique à
-       l'ancien site. */}}
-  {{ $align = lower $align }}
-  {{ if eq $align "right" }}{{ $align = "left" }}{{ end }}
-  {{ if not (in (slice "left" "center") $align) }}{{ $align = "center" }}{{ end }}
-  {{ $outerClasses := printf "td-pdf-embed-wrapper mb-4 media-align-%s" $align }}
-
-  {{/* Outer wrapper controls max-width and alignment */}}
-  <div class="{{ $outerClasses }}" style="max-width: {{ $maxWidth }};">
-
-      {{/* Inner container uses padding-bottom hack to enforce aspect ratio */}}
-      <div class="pdf-aspect-ratio-container" style="position: relative; height: 0; padding-bottom: {{ $aspectRatioPercent }}; overflow: hidden; border-radius: var(--bs-border-radius, 0.375rem); border: 1px solid #ccc;">
-          {{/* The object is positioned absolutely to fill the container */}}
-          <object class="td-pdf-embed" data="{{ $pdfSrc }}" type="application/pdf" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
-              {{/* Fallback content */}}
-              <p style="padding: 1rem;">It appears your browser doesn't support embedding PDFs. You can <a href="{{ $pdfSrc }}" target="_blank" rel="noopener noreferrer">download the PDF file instead</a>.</p>
-          </object>
+  <div class="pdf-embed-wrapper mb-4 {{ $alignClass }}" style="max-width: {{ $maxWidth }};">
+    {{ if $pages }}
+      {{/* === Mode "images empilées" === */}}
+      <div class="pdf-pages">
+        {{ range $pages }}
+          <img src="{{ .RelPermalink }}"
+               alt="Page {{ . }}"
+               loading="lazy"
+               decoding="async"
+               class="pdf-page" />
+        {{ end }}
       </div>
+    {{ else }}
+      {{/* === Fallback : embed `<object>` historique === */}}
+      {{ $aspectRatioPercent := printf "%v%%" (mul (float $aspectRatio) 100.0) }}
+      <div class="pdf-aspect-ratio-container"
+           style="position: relative; height: 0; padding-bottom: {{ $aspectRatioPercent }}; overflow: hidden; border-radius: 0.375rem; border: 1px solid #ccc;">
+        <object class="pdf-embed-object"
+                data="{{ $pdfSrc }}"
+                type="application/pdf"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
+          <p style="padding: 1rem;">Your browser cannot display PDFs inline. Use the download button below.</p>
+        </object>
+      </div>
+    {{ end }}
 
-      {{/* Link remains below the embed */}}
-      {{/* Using inline styles for simplicity here, consider moving to CSS */}}
-      <a href="{{ $pdfSrc }}" target="_blank" rel="noopener noreferrer" class="td-pdf-fullscreen-link rounded" style="display: block; text-align: center; margin-top: 0.5rem; padding: 0.5rem 1rem; background-color: #eee; border: 1px solid #ccc; text-decoration: none; color: #333; font-size: 0.9rem; transition: background-color 0.2s ease;">
-          View Fullscreen / New Tab
-      </a>
-      <style> /* Minimal hover style - best in main CSS */
-          .td-pdf-embed-wrapper .td-pdf-fullscreen-link:hover { background-color: #ddd; text-decoration: none; color: #000; }
-      </style>
+    {{/* === Bouton de téléchargement (toujours présent) === */}}
+    <a href="{{ $pdfSrc }}"
+       download
+       class="pdf-download-link">
+      Download PDF
+    </a>
   </div>
 {{ else }}
   <div class="alert alert-danger" role="alert">
-      PDF Shortcode Error: Could not find PDF file with src "{{ $src }}"
+    PDF Shortcode Error: Could not find PDF file with src "{{ $src }}"
   </div>
 {{ end }}

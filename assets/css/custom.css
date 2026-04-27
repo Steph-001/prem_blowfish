@@ -206,3 +206,148 @@ html.dark .news-line__more:hover { color: #93c5fd; }
 html.dark .news-date-tile {
   background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
 }
+
+/* ---------- Fix : lecteur vidéo Safari/Firefox ----------
+   Le wrapper .article-content[class*="chapter-"] est dans .prose, et
+   Tailwind Typography ajoute :
+       :where(video) { margin-top: 2em; margin-bottom: 2em; }
+   Or le shortcode local-video positionne le <video> en
+       position: absolute; top: 0; height: 100%;
+   Donc le margin pousse la vidéo de 2em vers le bas → le bas (~32px)
+   sort du container 16:9 et est coupé par overflow:hidden.
+   - Chrome dessine ses contrôles en overlay sur le viewport visible
+     du <video>, donc pas affecté visuellement.
+   - Safari/Firefox dessinent leurs contrôles dans la bounding box du
+     <video>, donc la barre de contrôles est COUPÉE.
+   - En plein écran, la vidéo échappe au container → tout va bien.
+   Fix : annuler le margin prose sur les vidéos absolues du shortcode. */
+.video-aspect-ratio-container > video {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* ---------- Fix : espace excessif sous fullscreen-image ----------
+   Même cause que la fix vidéo plus haut. Tailwind Typography (.prose)
+   ajoute `:where(img) { margin: 2em 0 }`. responsive-image a la classe
+   `mb-3` directement sur le <img> → override OK (0.75rem). Mais
+   fullscreen-image met `mb-3` sur le WRAPPER, pas sur l'<img> → les
+   2em prose s'appliquent → ~32px d'espace en plus avant la caption.
+   On annule donc ce margin sur l'image du wrapper. */
+.fullscreen-image-wrapper > img {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Même fix pour responsive-image : pas de wrapper, mais le shortcode
+   émet un <img class="img-fluid rounded d-block mb-3 mx-auto">. Le
+   `mb-3` overrride bien le margin-bottom prose, mais rien ne touche
+   au margin-top → 32px d'air en plus que sous fullscreen-image. */
+.article-content[class*="chapter-"] img.img-fluid {
+  margin-top: 0 !important;
+}
+
+/* ---------- PDF rasterisé (shortcode pdf.html mode "images empilées") ----------
+   Le shortcode pdf.html génère :
+     <div class="pdf-embed-wrapper mb-4 ...">
+       <div class="pdf-pages">
+         <img class="pdf-page" />          (une par page)
+       </div>
+       <a class="pdf-download-link">Download PDF</a>
+     </div>
+   Sans ces règles :
+   - prose ajoute `margin: 2em 0` aux <img> → 32px de vide après la
+     dernière page, le bouton apparaît "collé au document du dessous".
+   - le bouton lui-même n'a aucun style (lien brut).
+   - le wrapper n'a pas d'air autour de lui (mb-4 = 16px insuffisant). */
+
+.pdf-embed-wrapper {
+  margin-top: 2em !important;          /* aère avant le bloc PDF */
+  margin-bottom: 2em !important;       /* override le mb-4 (16px) du shortcode */
+}
+
+.pdf-pages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.pdf-pages .pdf-page {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 !important;                /* annule le margin prose :where(img) */
+}
+
+.pdf-download-link {
+  display: inline-block;
+  margin-top: 0.6rem;
+  padding: 0.4rem 0.9rem;
+  background: #f1f5f9;                 /* slate-100 */
+  border: 1px solid #cbd5e1;           /* slate-300 */
+  border-radius: 0.375rem;
+  color: #1e293b;                      /* slate-800 */
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.pdf-download-link:hover {
+  background: #e2e8f0;                 /* slate-200 */
+  border-color: #94a3b8;
+  text-decoration: none;
+}
+html.dark .pdf-download-link {
+  background: #1e293b;                 /* slate-800 */
+  border-color: #334155;               /* slate-700 */
+  color: #e2e8f0;                      /* slate-200 */
+}
+html.dark .pdf-download-link:hover {
+  background: #334155;                 /* slate-700 */
+  border-color: #475569;               /* slate-600 */
+}
+
+/* ---------- Cards Bootstrap-like (legacy aboriginals/witches/etc) ----------
+   Le markdown utilise <div class="card"><div class="card-body">
+   <p class="card-text"> pour les légendes sous les médias. Ces classes
+   sont du Bootstrap héritées du site Docsy. Blowfish n'a pas Bootstrap,
+   donc on reproduit le rendu attendu avec du CSS dédié.
+   Scope : .article-content[class*="chapter-"] uniquement. */
+
+.article-content[class*="chapter-"] .card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;            /* slate-200 */
+  border-radius: 0.5rem;
+  max-width: 92%;                       /* légèrement plus étroit que les médias 100% */
+  margin: 0.75rem auto !important;      /* override la règle margin auto chapter */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.article-content[class*="chapter-"] .card-body {
+  padding: 0.875rem 1.125rem;
+}
+.article-content[class*="chapter-"] .card-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #374151;                       /* slate-700 */
+  line-height: 1.55;
+}
+.article-content[class*="chapter-"] .text-primary {
+  color: #2563eb;                       /* blue-600 */
+}
+.article-content[class*="chapter-"] .fw-bold {
+  font-weight: 700;
+}
+
+/* Mode sombre */
+html.dark .article-content[class*="chapter-"] .card {
+  background: #1f2937;                  /* slate-800 */
+  border-color: #374151;                /* slate-700 */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+html.dark .article-content[class*="chapter-"] .card-text {
+  color: #d1d5db;                       /* slate-300 */
+}
+html.dark .article-content[class*="chapter-"] .text-primary {
+  color: #60a5fa;                       /* blue-400 */
+}

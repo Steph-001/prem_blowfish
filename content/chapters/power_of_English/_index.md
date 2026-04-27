@@ -37,43 +37,36 @@ lexicon:
 showTableOfContents: true
 ---
 ## A - The Powers of English
+
 ### Power 1: Simplicity
 
-{{< spacer height="2rem" >}}
-
-{{< audio src="Oneil_1.mp3" width="80%" rounded="true" >}}
+{{< audio src="oneil_1.mp3" width="100%" rounded="true" >}}
 
 ### Power 2: Brevity
 
-{{< spacer height="2rem" >}}
-
 {{< fullscreen-image src="tweet.jpg" >}}
 
-{{< spacer height="2rem" >}}
+{{< spacer height="1rem" >}}
 
-{{< fullscreen-image src="MJ.jpg" max_width="50%" >}}
+{{< fullscreen-image src="MJ.jpg" >}}
 
-{{< spacer height="2rem" >}}
+{{< spacer height="1rem" >}}
 
-{{< audio src="Oneil_2.mp3" width="80%" rounded="true" >}}
+{{< audio src="oneil_2.mp3" width="100%" rounded="true" >}}
 
 ### Power 3: Creativity
 
-{{< spacer height="2rem" >}}
-
 {{< fullscreen-image src="verbing.png" >}}
 
-{{< spacer height="2rem" >}}
+{{< spacer height="1rem" >}}
 
-{{< fullscreen-image src="portmanteau.jpg" max_width="80%" >}}
+{{< fullscreen-image src="portmanteau.jpg" >}}
 
-{{< spacer height="2rem" >}}
+{{< spacer height="1rem" >}}
 
-{{< audio src="portmanteau.mp3" width="80%" rounded="true" >}}
+{{< audio src="portmanteau.mp3" width="100%" rounded="true" >}}
 
 ### Power 4: Diversity
-
-{{< spacer height="2rem" >}}
 
 {{< responsive-image src="snake.webp" max_width="25%" >}}
 
@@ -82,13 +75,13 @@ showTableOfContents: true
     <p>Personally, I would be highly suspicious of anybody who could converse with snakes, as serpents are often used in the worst kinds of Dark Magic, and are historically associated with evil-doers."</p>
   </blockquote>
   <figcaption class="blockquote-footer">
-    J.K.Rowling, <cite title="Source Title"><i>Harry Potter</i></cite>
+    J.K. Rowling, <cite title="Source Title"><i>Harry Potter</i></cite>
   </figcaption>
 </figure>
 
-{{< spacer height="2rem" >}}
+{{< spacer height="1rem" >}}
 
-<div class="video-plus-card-wrapper mb-4" style="max-width:560px;">
+<div class="video-plus-card-wrapper mb-4" style="max-width:100%;">
 
 {{< local-video src="histo.mp4" poster="still.jpg" max_width="100%" align="left">}}
 
@@ -97,13 +90,15 @@ showTableOfContents: true
     <p class="card-text text-justify">The history of the English language.</p>
   </div>
 </div>
+</div>
 
 ### Power 5: Musicality
 
-{{< audio src="Oneil_3.mp3" width="80%" rounded="true" >}}
-## B- It's got rhythm
+{{< audio src="oneil_3.mp3" width="100%" rounded="true" >}}
+
+
+## B - It's got rhythm
 
 {{< gallery max_width="250px" >}}
 
-{{< audio src="boots.mp3" width="80%" rounded="true" >}}
-
+{{< audio src="boots.mp3" width="100%" rounded="true" >}}

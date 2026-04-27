@@ -68,71 +68,70 @@ showTableOfContents: true
 ---
 ## Why do Castaways fascinate and inspire literature, TV shows and reality?
 
-{{< fullscreen-image src="castaway.jpg" max_width="80%" align="right" >}}
-<div class="card" style="max-width: 80%; clear: left;">
+{{< fullscreen-image src="castaway.jpg" >}}
+<div class="card">
   <div class="card-body">
-    <p class="card-text text-justify">Tom Hanks, in Robert Zemeckis's movie<i> Cast Away</i>, 2001. </p>
+    <p class="card-text text-justify">Tom Hanks, in Robert Zemeckis's movie <i>Cast Away</i>, 2001.</p>
   </div>
 </div>
 
-{{< spacer height="2rem" >}}
+{{< spacer height="1rem" >}}
 
-<div class="video-plus-card-wrapper mb-4" style="max-width: 80%;">
+<div class="video-plus-card-wrapper mb-4" style="max-width:100%;">
 
 {{< local-video src="cast.mp4" poster="photo.jpg" max_width="100%" align="left">}}
 
-<div class="card" style="max-width: 100%; clear: left;">
+<div class="card">
   <div class="card-body">
-    <p class="card-text text-justify">The <span class="text-primary fw-bold"> <i>Cast Away (trailer), </i> Robert Zemeckis, 2001.</p>
+    <p class="card-text text-justify"><span class="text-primary fw-bold"><i>Cast Away</i> (trailer)</span>, Robert Zemeckis, 2001.</p>
   </div>
 </div>
 </div>
 
-### A - The Enduring Myth of Robinson Crusoe
+
+## A - The Enduring Myth of Robinson Crusoe
+
 #### *Why can the myth of Robinson be considered a real-life story?*
+
 #### Back to the origins of Robinson
 
-{{< spacer height="2rem" >}}
+{{< pdf src="journal.pdf" max_width="100%" >}}
 
-{{< pdf src="journal.pdf" max_width="80%" align="left" >}}
-
-{{< fullscreen-image src="ada.jpeg" max_width="80%" align="right" >}}
-<div class="card" style="max-width: 80%; clear: left;">
+{{< fullscreen-image src="ada.jpeg" >}}
+<div class="card">
   <div class="card-body">
-    <p class="card-text text-justify"> </p><span class="text-primary fw-bold">Ada Blackjack</span> was an Iñupiaq woman who accompanied an Arctic expedition to the uninhabited Wrangel Island, north of Siberia, eventually living alone on the island for eight months after the other expedition members left or died.
+    <p class="card-text text-justify"><span class="text-primary fw-bold">Ada Blackjack</span> was an Iñupiaq woman who accompanied an Arctic expedition to the uninhabited Wrangel Island, north of Siberia, eventually living alone on the island for eight months after the other expedition members left or died.</p>
   </div>
 </div>
 
 #### The Arctic's real life Robinson
 
-{{< spacer height="2rem" >}}
+{{< audio src="ada.mp3" width="100%" rounded="true" >}}
 
-{{< audio src="ada.mp3" width="80%" rounded="true" >}}
 
-### B - Playing Robinson Crusoe
+## B - Playing Robinson Crusoe
+
 #### Survivial TV
 
-{{< spacer height="2rem" >}}
+<div class="video-plus-card-wrapper mb-4" style="max-width:100%;">
 
-<div class="video-plus-card-wrapper mb-4" style="max-width: 80%;">
+{{< local-video src="reality.mp4" max_width="100%" align="left">}}
 
-{{< local-video src="reality.mp4"  max_width="100%" align="left">}}
 </div>
 
 #### Willing Survivors
 
-{{< fullscreen-image src="lynx_pic.png" max_width="80%" align="right" >}}
-
-<div class="card" style="max-width: 80%; clear: left;">
+{{< fullscreen-image src="lynx_pic.png" >}}
+<div class="card">
   <div class="card-body">
-    <p class="card-text text-justify"> <span class="text-primary fw-bold">Living Wild</span> is a group of 21st-century hunter-gatherers who rediscovers the traditional living skills of the Paleolithic. The movement is spearheaded by a woman named Lynx Vilden and unified by the ambition to leave modernity and return to primitive living. </p>
+    <p class="card-text text-justify"><span class="text-primary fw-bold">Living Wild</span> is a group of 21st-century hunter-gatherers who rediscovers the traditional living skills of the Paleolithic. The movement is spearheaded by a woman named Lynx Vilden and unified by the ambition to leave modernity and return to primitive living.</p>
   </div>
 </div>
+
+{{< spacer height="1rem" >}}
+
+<div class="video-plus-card-wrapper mb-4" style="max-width:100%;">
+
+{{< local-video src="aaa.mp4" max_width="100%" align="left">}}
+
 </div>
-
-{{< spacer height="2rem" >}}
-
-<div class="video-plus-card-wrapper mb-4" style="max-width: 80%;">
-
-{{< local-video src="aaa.mp4"  max_width="100%" align="left">}}
-

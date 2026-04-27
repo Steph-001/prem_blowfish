@@ -51,68 +51,70 @@ lexicon:
   stressed: (to) forg*o
 showTableOfContents: true
 ---
-{{< spacer height="2rem" >}}
-
-### A - Lady Liberty's Welcome
-
-{{< spacer height="2rem" >}}
+## A - Lady Liberty's Welcome
 
 {{< gallery max_width="280px" >}}
 
-{{< spacer height="2rem" >}}
+{{< spacer height="1rem" >}}
 
-{{< fullscreen-image src="Ellis.jpg" max_width="80%" align="right" >}}
+{{< fullscreen-image src="ellis.jpg" >}}
 
-{{< spacer height="2rem" >}}
+{{< spacer height="1rem" >}}
 
-{{< fullscreen-image src="colossus.jpg" max_width="80%" align="right" >}}
+{{< fullscreen-image src="colossus.jpg" >}}
 
-### B - The First Refugees
 
-{{< fullscreen-image src="tg.webp" max_width="80%" align="right" >}}
+## B - The First Refugees
 
-{{< spacer height="2rem" >}}
+{{< fullscreen-image src="tg.webp" >}}
 
-{{< pdf src="thanksgiving.pdf" max_width="40%" align="left" >}}
+{{< pdf src="thanksgiving.pdf" max_width="100%" >}}
 
-### C - The City of Dreams
 
-{{< spacer height="2rem" >}}
+## C - The City of Dreams
 
-{{< fullscreen-image src="rabbits.webp" max_width="80%" align="left" >}}
-<div class="card" style="max-width: 80%; clear: left;">
+{{< fullscreen-image src="rabbits.webp" >}}
+<div class="card">
   <div class="card-body">
     <p class="card-text text-justify">The gang of Dead Rabbits from the movie <i> Gangs of New York</i>, Martin Scorcese, 2002. <br> The Dead Rabbits: Irish immigrants led by Amsterdam Vallon (played by Leonardo DiCaprio) in the Five Points (districts of New York City) </p>
   </div>
 </div>
 
-{{< spacer height="2rem" >}}
-
-{{< fullscreen-image src="natives.jpg" max_width="80%" align="left" >}}
-<div class="card" style="max-width: 80%; clear: left;">
+{{< fullscreen-image src="natives.jpg" >}}
+<div class="card">
   <div class="card-body">
     <p class="card-text text-justify">The gang of Native Americans from the movie <i> Gangs of New York</i>, Martin Scorcese, 2002. <br> The Native Americans: the first immigrants, in the Five Points. </p>
   </div>
 </div>
 
-{{< spacer height="2rem" >}}
+{{< spacer height="1rem" >}}
 
-<div class="video-plus-card-wrapper mb-4" style="max-width:560px;">
+<div class="video-plus-card-wrapper mb-4" style="max-width:100%;">
 
 {{< local-video src="gangs.mp4" poster="still.jpg" max_width="100%" align="left">}}
 
-<div class="card" style="max-width: 100%; clear: left;">
+<div class="card">
   <div class="card-body">
-    <p class="card-text text-justify">The <span class="text-primary fw-bold">The arrival of the immigrants in the 1860s.</span> Extract from <i>Gangs of New York, </i> Martin Scorcese, 2002.</p>
+    <p class="card-text text-justify"><span class="text-primary fw-bold">The arrival of the immigrants in the 1860s.</span> Extract from <i>Gangs of New York, </i> Martin Scorcese, 2002.</p>
   </div>
 </div>
-### D - The Hamilton Mixtape 
+</div>
+
+
+## D - The Hamilton Mixtape 
+
+<div class="video-plus-card-wrapper mb-4" style="max-width:100%;">
 
 {{< local-video src="hamilton.mp4" poster="imm.jpg" max_width="100%" align="left">}}
-### E - New York Ahead
 
-{{< pdf src="ahead.pdf" max_width="80%" align="left" >}}
+</div>
+
+
+## E - New York Ahead
+
+{{< pdf src="ahead.pdf" max_width="100%" >}}
+
 
 ## Final Task
 
-{{< pdf src="museum.pdf" max_width="100%" align="left" >}}
+{{< pdf src="museum.pdf" max_width="100%" >}}

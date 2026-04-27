@@ -115,7 +115,11 @@
       {{ end }}
 
       <div class="min-w-0 min-h-0 max-w-fit">
-        <div class="article-content max-w-prose">
+        {{/* chapter-<slug> permet aux règles CSS scopées
+             aux chapitres (PDFs, vidéos, cards, etc.) de s'appliquer.
+             Slug = nom du dossier du chapitre (ex: chapter-aboriginals). */}}
+        {{ $chapterSlug := path.Base (path.Clean .File.Dir) }}
+        <div class="article-content max-w-prose chapter-{{ $chapterSlug }}">
           {{ .Content }}
         </div>
       </div>

@@ -81,58 +81,49 @@ lexicon:
   stressed: d*o*wnsize
 showTableOfContents: true
 ---
-{{< spacer height="2rem" >}}
-
-### A - Evolving figures
-
-{{< spacer height="2rem" >}}
+## A - Evolving figures
 
 {{< gallery max_width="150px" >}}
-### B - A stereotypical detective
 
-{{< spacer height="2rem" >}}
 
-{{< audio src="15.mp3" width="400px">}}
-### C - A masculine atmosphere
+## B - A stereotypical detective
 
-{{< spacer height="2rem" >}}
+{{< audio src="15.mp3" width="100%" rounded="true" >}}
 
-{{< local-video src="prime_suspect.mp4" poster="tennison.jpg" max_width="400px" align="left" >}}
 
-{{< spacer height="2rem" >}}
+## C - A masculine atmosphere
+
+<div class="video-plus-card-wrapper mb-4" style="max-width:100%;">
+
+{{< local-video src="prime_suspect.mp4" poster="tennison.jpg" max_width="100%" align="left">}}
+
+</div>
 
 <!---
 ### D - The No.1 Ladies' Detective Agency
 
-{{< spacer height="2rem" >}}
+{{< fullscreen-image src="p40_1.jpg" alt="Detective image" >}}
 
-{{< fullscreen-image src="p40_1.jpg" alt="Detective image" max_width="400px" align="left" >}}
+{{< fullscreen-image src="p41_2.jpg" alt="Detective image" >}}
 
-{{< spacer height="2rem" >}}
-
-{{< fullscreen-image src="p41_2.jpg" alt="Detective image" max_width="400px" align="left" >}}
-
-{{< spacer height="2rem" >}}
-
-{{< fullscreen-image src="p41_2.jpg" alt="Detective image" max_width="400px" align="left" >}}
+{{< fullscreen-image src="p41_2.jpg" alt="Detective image" >}}
 
 --->
 
-### D - A newcomer
+## D - A newcomer
 
-{{< spacer height="2rem" >}}
+{{< pdf src="Newco.pdf" max_width="100%" >}}
 
-{{< pdf src="Newco.pdf" max_width="400px" align="left">}}
 
-### E - Inside the FBI
+## E - Inside the FBI
 
-{{< spacer height="2rem" >}}
+<div class="video-plus-card-wrapper mb-4" style="max-width:100%;">
 
-{{< local-video src="FBI.mp4" poster="output.png" max_width="400px" align="left">}}
+{{< local-video src="FBI.mp4" poster="output.png" max_width="100%" align="left">}}
 
-### G - Reading about female detectves
+</div>
 
-{{< spacer height="2rem" >}}
 
-{{< pdf src="reading.pdf" max_width="400px" align="left">}}
+## F - Reading about female detectives
 
+{{< pdf src="reading.pdf" max_width="100%" >}}
