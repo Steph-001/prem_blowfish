@@ -80,6 +80,7 @@ lexicon:
   definition: (to) make smaller
   stressed: d*o*wnsize
 showTableOfContents: true
+copyright: "<em>Credits to </em>"
 ---
 ## A - Evolving figures
 
@@ -112,7 +113,7 @@ showTableOfContents: true
 
 ## D - A newcomer
 
-{{< pdf src="Newco.pdf" max_width="100%" >}}
+{{< pdf src="Newco.pdf" max_width="100%" max_pages="1" >}}
 
 
 ## E - Inside the FBI
@@ -126,4 +127,4 @@ showTableOfContents: true
 
 ## F - Reading about female detectives
 
-{{< pdf src="reading.pdf" max_width="100%" >}}
+{{< pdf src="reading.pdf" max_width="100%" max_pages="1" >}}

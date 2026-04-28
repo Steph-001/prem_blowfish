@@ -65,6 +65,7 @@ lexicon:
   definition: isolated/cut off from civilisation
   stressed: c*astaway
 showTableOfContents: true
+copyright: "<em>Credits to </em>"
 ---
 ## Why do Castaways fascinate and inspire literature, TV shows and reality?
 
@@ -95,7 +96,7 @@ showTableOfContents: true
 
 #### Back to the origins of Robinson
 
-{{< pdf src="journal.pdf" max_width="100%" >}}
+{{< pdf src="journal.pdf" max_width="100%" max_pages="1" >}}
 
 {{< fullscreen-image src="ada.jpeg" >}}
 <div class="card">

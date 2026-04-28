@@ -31,6 +31,7 @@ Guide de maintenance et de référence pour faire évoluer les sites
 15. Synchronisation Mac/PC et Git
 16. Pièges connus
 17. Dépannage
+18. Crédits / copyright des médias
 
 ---
 
@@ -239,6 +240,7 @@ lexicon:
 | `description` | string | **Problématique** (rendue en H2 italique sur la page) |
 | `showTableOfContents` | bool | TOC à droite sur le chapitre |
 | `lexicon` | array | Liste de termes (voir section 10) |
+| `copyright` | string | Mention copyright unique du chapitre (voir section 18) |
 
 ### La règle d'or sur la problématique
 
@@ -321,7 +323,7 @@ section 8).
 ### `pdf` — PDF rasterisé en images empilées
 
 ```markdown
-{{< pdf src="circe.pdf" max_width="100%" >}}
+{{< pdf src="circe.pdf" max_width="100%" max_pages="1" >}}
 ```
 
 Le shortcode cherche `<base>-page-*.jpg` à côté du PDF (générés par le
@@ -329,14 +331,17 @@ script `convert_pdfs.py`, voir section 9). S'il les trouve, il empile les
 images. Sinon, il retombe sur l'embed `<object>` natif. Un bouton
 **"Download PDF"** est toujours affiché sous le bloc.
 
-**Limiter le nombre de pages affichées** :
+**Convention sur les 3 sites** : tous les PDFs utilisent `max_pages="1"`
+pour n'afficher que la 1re page (rendu plus lisible, moins de scroll). Le
+bouton Download donne accès au PDF complet de toute façon.
+
+**Variantes** :
 
 ```markdown
-{{< pdf src="long_doc.pdf" max_width="100%" max_pages="1" >}}
+{{< pdf src="doc.pdf" max_width="100%" max_pages="1" >}}    <!-- 1re page seulement -->
+{{< pdf src="doc.pdf" max_width="100%" max_pages="3" >}}    <!-- 3 premières pages -->
+{{< pdf src="doc.pdf" max_width="100%" >}}                  <!-- toutes les pages (omettre max_pages) -->
 ```
-
-`max_pages="1"` n'affiche que la 1re page. Le bouton Download pointe toujours
-vers le PDF complet.
 
 ### `audio` — lecteur audio
 
@@ -747,6 +752,39 @@ Le dossier `medias non référencés/` à la racine de chaque site contient les
 fichiers déplacés là parce que pas (encore) utilisés dans le markdown :
 brouillons, alternatives, sources `.docx`, etc. Pas inclus dans le build.
 
+### Vidéos MP4 en pix_fmt yuvj420p (espace JPEG)
+
+Symptôme côté navigateur : "No video with supported format and MIME type
+found". La vidéo a un codec H.264 valide mais utilise l'espace colorimétrique
+`yuvj420p` (JPEG / full range 0-255), techniquement déprécié et rejeté par
+de nombreux navigateurs. Souvent invisible sous Docsy à l'époque, mais
+casse aujourd'hui.
+
+**Diagnostic** — scanner tous les sites pour repérer les vidéos
+problématiques :
+
+```bash
+for site in sec prem term; do
+  find ~/Sync/$site/content/chapters -name "*.mp4" -exec sh -c \
+    'pix=$(ffprobe -v error -select_streams v -show_entries stream=pix_fmt -of csv=p=0 "$1" 2>/dev/null); [ "$pix" = "yuvj420p" ] && echo "  $1"' _ {} \;
+done
+```
+
+Si la commande ne retourne rien : tout va bien. Sinon, chaque ligne est une
+vidéo à re-encoder.
+
+**Fix** — re-encoder une vidéo problématique :
+
+```bash
+cd ~/Sync/sec/content/chapters/<chapitre>/
+ffmpeg -i video.mp4 -c:v libx264 -profile:v high -pix_fmt yuv420p \
+       -crf 18 -preset medium -c:a aac -b:a 128k video_new.mp4
+mv video_new.mp4 video.mp4    # remplace l'original
+```
+
+CRF 18 préserve la qualité visuelle ; abaisser à 23-28 pour une vidéo plus
+légère.
+
 ### Ne pas toucher `themes/blowfish/`
 
 Toute modification directement dans le dossier du thème sera écrasée si tu
@@ -827,6 +865,45 @@ git push -u origin main --force
 ```
 
 > **Attention** — `--force` écrase l'historique distant. À utiliser seulement si tu es sûr que la version locale est la bonne.
+
+---
+
+## 18. Copyright des médias
+
+Le frontmatter accepte un champ `copyright` (chaîne unique) qui rend
+automatiquement une ligne discrète en bas de la page chapitre, type footer
+de magazine. Une seule mention par chapitre — pour synthétiser les sources
+ou la mention légale globale du chapitre.
+
+### Front matter
+
+```yaml
+copyright: "© 2026 Stéphane Jacquet — Sources : <em>Seek Discomfort</em>, BBC, Fourth Estate. Usage pédagogique."
+```
+
+- HTML autorisé dans la chaîne (`<em>`, `<i>`, `<strong>`, `<a>`, etc.).
+- Si `copyright` est absent ou vide, **aucun bloc n'est rendu** — comportement
+  silencieux, pas d'erreur.
+
+### Rendu
+
+Le layout `chapters/list.html` rend automatiquement à la fin de la page :
+
+```
+─────────────────────────────────
+© 2026 Stéphane Jacquet — Sources : Seek Discomfort, BBC, Fourth Estate. Usage pédagogique.
+```
+
+Style : ligne en italique très discret (gris clair, petit), séparée du
+contenu par une fine ligne grise. Adapté au mode sombre. Aucun heading,
+juste une mention de bas de page comme un copyright traditionnel.
+
+### Bonnes pratiques
+
+- Une seule mention concise par chapitre.
+- Préfixer avec `©` ou `Copyright` si pertinent.
+- Citer les sources principales en fin de mention.
+- Pour le domaine public ou licences libres, le préciser.
 
 ---
 

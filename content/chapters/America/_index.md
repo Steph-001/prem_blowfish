@@ -50,6 +50,7 @@ lexicon:
   definition: se passer de
   stressed: (to) forg*o
 showTableOfContents: true
+copyright: "<em>Credits to </em>"
 ---
 ## A - Lady Liberty's Welcome
 
@@ -68,7 +69,7 @@ showTableOfContents: true
 
 {{< fullscreen-image src="tg.webp" >}}
 
-{{< pdf src="thanksgiving.pdf" max_width="100%" >}}
+{{< pdf src="thanksgiving.pdf" max_width="100%" max_pages="1" >}}
 
 
 ## C - The City of Dreams
@@ -112,9 +113,7 @@ showTableOfContents: true
 
 ## E - New York Ahead
 
-{{< pdf src="ahead.pdf" max_width="100%" >}}
+{{< pdf src="ahead.pdf" max_width="100%" max_pages="1" >}}
 
 
-## Final Task
 
-{{< pdf src="museum.pdf" max_width="100%" >}}

@@ -7,6 +7,7 @@ weight: 6
 featureimage: poster3.jpg
 description: Why are land, memory and stories one and the same for Aborigines?
 showTableOfContents: true
+copyright: "<em>Credits to Hit the Road 1re (2019) - Magnard</em>"
 ---
 ## Introduction
 
@@ -21,7 +22,7 @@ showTableOfContents: true
 
 #### Passing on Knowledge
 
-{{< pdf src="p255.pdf" max_width="100%" >}}
+{{< pdf src="p255.pdf" max_width="100%" max_pages="1" >}}
 
 {{< spacer height="1rem" >}}
 
@@ -39,7 +40,7 @@ showTableOfContents: true
   </div>
 </div>
 
-{{< pdf src="down_under.pdf" max_width="100%" >}}
+{{< pdf src="down_under.pdf" max_width="100%" max_pages="1" >}}
 
 #### Living off the Land
 

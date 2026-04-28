@@ -351,3 +351,27 @@ html.dark .article-content[class*="chapter-"] .card-text {
 html.dark .article-content[class*="chapter-"] .text-primary {
   color: #60a5fa;                       /* blue-400 */
 }
+
+/* ---------- Copyright en bas de chapitre ----------
+   Activé via le frontmatter `copyright:` (chaîne unique, HTML autorisé).
+   Rendu par layouts/chapters/list.html.
+   Style : ligne discrète type footer, petit et grisé. */
+.chapter-credits {
+  margin-top: 3em;
+  padding-top: 1em;
+  border-top: 1px solid #e5e7eb;        /* slate-200 */
+  font-size: 0.75rem;                    /* petit */
+  color: #9ca3af;                        /* slate-400 grisé */
+  font-style: italic;
+  line-height: 1.5;
+}
+.chapter-credits em,
+.chapter-credits i {
+  font-style: italic;
+}
+
+/* Mode sombre */
+html.dark .chapter-credits {
+  border-top-color: #374151;             /* slate-700 */
+  color: #6b7280;                        /* slate-500 grisé */
+}

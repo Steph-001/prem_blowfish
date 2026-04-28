@@ -35,6 +35,7 @@ lexicon:
   definition: génitif
   stressed: g*enitive
 showTableOfContents: true
+copyright: "<em>Credits to </em>"
 ---
 ## A - The Powers of English
 

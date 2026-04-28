@@ -121,6 +121,12 @@
         {{ $chapterSlug := path.Base (path.Clean .File.Dir) }}
         <div class="article-content max-w-prose chapter-{{ $chapterSlug }}">
           {{ .Content }}
+
+          {{/* Bloc Copyright — rendu si le frontmatter contient `copyright:`.
+               Chaîne unique, HTML autorisé (<em>, <i>, etc.). */}}
+          {{ with .Params.copyright }}
+            <aside class="chapter-credits">{{ . | safeHTML }}</aside>
+          {{ end }}
         </div>
       </div>
     </section>
