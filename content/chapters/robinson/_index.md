@@ -5,7 +5,7 @@ date: '2025-10-27T14:56:15+01:00'
 draft: false
 weight: 8
 featureimage: vignette.jpg
-description: ''
+description: 'Why do Castaways fascinate and inspire literature, TV shows and reality?'
 lexicon:
 - term: (to) hunt
   definition: chasser
@@ -65,9 +65,9 @@ lexicon:
   definition: isolated/cut off from civilisation
   stressed: c*astaway
 showTableOfContents: true
-copyright: "<em>Credits to </em>"
+copyright: "<em>Credits to Hit The Road 1ere (2019) - Magnard</em>"
 ---
-## Why do Castaways fascinate and inspire literature, TV shows and reality?
+
 
 {{< fullscreen-image src="castaway.jpg" >}}
 <div class="card">

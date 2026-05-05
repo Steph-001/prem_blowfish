@@ -92,7 +92,7 @@ copyright: "<em>Credits to </em>"
 
 <div class="video-plus-card-wrapper mb-4" style="max-width:100%;">
 
-{{< local-video src="gangs.mp4" poster="still.jpg" max_width="100%" align="left">}}
+{{< local-video src="gangs.mp4"  max_width="100%" align="left">}}
 
 <div class="card">
   <div class="card-body">

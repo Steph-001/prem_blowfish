@@ -5,7 +5,7 @@ date: '2025-08-11T22:37:25+02:00'
 draft: false
 weight: 10
 featureimage: vignette.jpg
-description: ''
+description: 'What is behind the power of English?'
 lexicon:
 - term: morphology
   definition: The study of word forms
@@ -35,7 +35,7 @@ lexicon:
   definition: génitif
   stressed: g*enitive
 showTableOfContents: true
-copyright: "<em>Credits to </em>"
+copyright: "<em>Credits to In Full Swing (2019) - Hatier </em>"
 ---
 ## A - The Powers of English
 
@@ -84,7 +84,7 @@ copyright: "<em>Credits to </em>"
 
 <div class="video-plus-card-wrapper mb-4" style="max-width:100%;">
 
-{{< local-video src="histo.mp4" poster="still.jpg" max_width="100%" align="left">}}
+{{< local-video src="histo.mp4"  max_width="100%" align="left">}}
 
 <div class="card">
   <div class="card-body">

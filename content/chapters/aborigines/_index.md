@@ -8,6 +8,43 @@ featureimage: poster3.jpg
 description: Why are land, memory and stories one and the same for Aborigines?
 showTableOfContents: true
 copyright: "<em>Credits to Hit the Road 1re (2019) - Magnard</em>"
+lexicon:
+- term: "ind*igenous"
+  definition: "native to a particular place"
+  stressed: "ind*igenous"
+- term: "elders"
+  definition: "les anciens"
+  stressed: "*elders"
+- term: "Abor*igine"
+  definition: "aborigène (nom)"
+  stressed: "Abor*igine"
+- term: "Aboriginal"
+  definition: "aborigène (adj)"
+  stressed: "Abor*iginal"
+- term: "native"
+  definition: "natif"
+  stressed: "n*ative"
+- term: "kangaroo"
+  definition: "an Australian animal that moves by jumping and carries its babies in a pouch"
+  stressed: "kangar*o*o"
+- term: "knowledge"
+  definition: "savoir, connaissance"
+  stressed: "kn*o*wledge"
+- term: "behaviour"
+  definition: "comportement"
+  stressed: "beh*aviour"
+- term: "landscape"
+  definition: "paysage"
+  stressed: "l*andscape"
+- term: "achieve"
+  definition: "accomplir"
+  stressed: "ach*i*eve"
+- term: "pass on knowledge"
+  definition: "transmettre le savoir"
+  stressed: "pass on knowledge"
+- term: "legacy"
+  definition: "héritage"
+  stressed: "l*egacy"
 ---
 ## Introduction
 
@@ -26,7 +63,6 @@ copyright: "<em>Credits to Hit the Road 1re (2019) - Magnard</em>"
 
 {{< spacer height="1rem" >}}
 
-{{< fullscreen-image src="p255.png" >}}
 
 
 ## B - Connected with the Land
